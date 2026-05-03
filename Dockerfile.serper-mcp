@@ -1,0 +1,21 @@
+FROM golang:1.23-alpine AS builder
+WORKDIR /app
+
+RUN apk add --no-cache git
+
+RUN git clone --depth 1 https://github.com/hightemp/go_serper_mcp_server.git /src
+
+WORKDIR /src
+
+RUN go build -o /serper-mcp .
+
+FROM alpine:latest
+WORKDIR /app
+
+RUN apk add --no-cache ca-certificates
+
+COPY --from=builder /serper-mcp ./serper-mcp
+
+EXPOSE 8894
+
+CMD ["./serper-mcp", "-t", "sse", "-h", "0.0.0.0", "-p", "8894"]
