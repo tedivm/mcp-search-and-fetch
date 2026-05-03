@@ -36,7 +36,7 @@ flowchart LR
 
 | Service              | Port       | Description                            |
 | -------------------- | ---------- | -------------------------------------- |
-| `firecrawl`          | 3002       | Firecrawl API                          |
+| `firecrawl` | 3002 (configurable) | Firecrawl API |
 | `playwright-service` | (internal) | Browser scraping microservice          |
 | `redis`              | (internal) | Cache / rate limiting                  |
 | `rabbitmq`           | (internal) | Message queue                          |

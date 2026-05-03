@@ -73,7 +73,7 @@ services:
       rabbitmq:
         condition: service_healthy
     ports:
-      - "${PORT:-3002}:${INTERNAL_PORT:-3002}"
+      - "${FIRECRAWL_API_PORT:-3002}:${INTERNAL_PORT:-3002}"
     command: node dist/src/harness.js --start-docker
     restart: unless-stopped
     logging:
@@ -152,7 +152,7 @@ services:
     depends_on:
       - firecrawl
     ports:
-      - "8080:8080"
+      - "${FIRECRAWL_MCP_PORT:-8080}:8080"
     logging:
       driver: "json-file"
       options:
@@ -169,7 +169,7 @@ services:
     environment:
       SERPER_API_KEY: ${SERPER_API_KEY}
     ports:
-      - "8894:8894"
+      - "${SERPER_MCP_PORT:-8894}:8894"
     logging:
       driver: "json-file"
       options:
